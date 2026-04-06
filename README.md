@@ -56,7 +56,7 @@ pip install -r requirements.txt
 Создайте файл `.env` в той же директории:
 
 ```env
-TELEGRAM_TOKEN=your_bot_token_here
+TELEGRAM_TOKEN="your_bot_token_here"
 CHECK_INTERVAL=60
 JOBS_FILE=active_jobs.json
 ```
