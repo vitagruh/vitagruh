@@ -18,6 +18,10 @@ import traceback
 from fake_useragent import UserAgent
 from contextlib import contextmanager
 from typing import Optional, Dict, List, Any
+from captcha.image import ImageCaptcha
+import random
+import string
+import io
 
 
 # ============================================
@@ -418,6 +422,10 @@ rate_limit_store = {}
 RATE_LIMIT_WINDOW = 60  # Окно в секундах
 RATE_LIMIT_MAX_REQUESTS = 30  # Максимум запросов в окно
 
+# Captcha хранилище: {chat_id: {'code': str, 'timestamp': float}}
+captcha_store = {}
+CAPTCHA_EXPIRY = 300  # Время жизни капчи в секундах (5 минут)
+
 # Популярные станции по умолчанию (если база еще пуста)
 DEFAULT_STATIONS = [
     "Минск", "Москва", "Санкт-Петербург", "Гомель", "Брест",
@@ -714,28 +722,13 @@ def send_welcome(message):
     last_name = message.from_user.last_name if hasattr(message.from_user, 'last_name') else None
     save_user(chat_id, username, first_name, last_name)
     
-    # Создаем клавиатуру с популярными станциями и командами
-    keyboard = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False)
-    keyboard.add(KeyboardButton("🚂 Начать поиск"))
-    keyboard.add(KeyboardButton("📊 Мои трекинги"), KeyboardButton("📜 История"))
-    keyboard.add(KeyboardButton("❓ Помощь"))
+    # Создаем inline-клавиатуру с кнопкой Старт
+    keyboard = InlineKeyboardMarkup(row_width=1)
+    keyboard.add(InlineKeyboardButton("🚀 Старт", callback_data="start_tracking"))
     
     text = (
         f"👋 Привет, {first_name or 'путешественник'}! Я бот для отслеживания билетов БЖД.\n\n"
-        "✨ <b>Мои возможности:</b>\n"
-        "• 🔍 Поиск билетов по маршруту\n"
-        "• 🔔 Уведомления при появлении мест\n"
-        "• 📊 Отслеживание нескольких поездов одновременно\n"
-        "• 💓 Heartbeat-сообщения о статусе проверки\n"
-        "• 📜 История ваших поисков\n\n"
-        "<b>Команды:</b>\n"
-        "/track - Начать поиск билетов\n"
-        "/mytracks - Показать все активные трекинги\n"
-        "/status - Статус текущего трекинга\n"
-        "/stop - Остановить трекинг\n"
-        "/history - История поисков\n"
-        "/help - Подробная справка\n\n"
-        "Нажми кнопку ниже или отправь /track чтобы начать!"
+        "Нажми «Старт», чтобы начать поиск билетов!"
     )
     bot.send_message(chat_id, text, parse_mode="HTML", reply_markup=keyboard)
     logger.info(f"👋 Пользователь {chat_id} ({first_name}) запустил бота")
@@ -918,6 +911,34 @@ def stop_tracking_cmd(message):
         bot.reply_to(message, "⏹ Отслеживание остановлено.")
         user_steps.pop(chat_id, None)
 
+@bot.callback_query_handler(func=lambda call: call.data == "start_tracking")
+def on_start_tracking(call):
+    """Обработчик кнопки Старт - запуск трекинга с капчей"""
+    chat_id = call.message.chat.id
+    
+    # Генерируем код капчи (4 символа: буквы и цифры)
+    captcha_code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=4))
+    captcha_store[chat_id] = {
+        'code': captcha_code,
+        'timestamp': time.time()
+    }
+    
+    # Создаем изображение капчи
+    image = ImageCaptcha(width=200, height=80)
+    data = image.generate(captcha_code)
+    
+    # Отправляем капчу пользователю
+    bot.send_photo(
+        chat_id,
+        photo=data,
+        caption="🤖 <b>Подтвердите, что вы не робот!</b>\n\nВведите символы с изображения:",
+        parse_mode="HTML"
+    )
+    
+    # Устанавливаем шаг ожидания ввода капчи
+    user_steps[chat_id] = 'captcha_verify'
+    logger.info(f"🔐 Капча отправлена пользователю {chat_id}")
+
 @bot.callback_query_handler(func=lambda call: call.data.startswith("stop_tracking_") or call.data == "stop_all_trackings")
 def on_stop_tracking_choice(call):
     """Обработчик выбора трекинга для остановки"""
@@ -1075,6 +1096,63 @@ def handle_step_input(message):
     if not check_rate_limit(chat_id):
         bot.send_message(chat_id, "⚠️ Слишком много запросов. Пожалуйста, подождите немного.")
         logger.warning(f"⚠️ Rate limit для пользователя {chat_id} на шаге {current_step}")
+        return
+    
+    # Обработка ввода капчи
+    if current_step == 'captcha_verify':
+        captcha_data = captcha_store.get(chat_id)
+        
+        if not captcha_data:
+            bot.send_message(chat_id, "❌ Время капчи истекло. Нажмите /start чтобы начать заново.")
+            user_steps.pop(chat_id, None)
+            return
+        
+        # Проверяем, не истекла ли капча (5 минут)
+        if time.time() - captcha_data['timestamp'] > CAPTCHA_EXPIRY:
+            captcha_store.pop(chat_id, None)
+            user_steps.pop(chat_id, None)
+            bot.send_message(chat_id, "⏰ Время капчи истекло. Нажмите /start чтобы начать заново.")
+            return
+        
+        # Проверяем код капчи (приводим к верхнему регистру для сравнения)
+        user_input = message.text.strip().upper()
+        correct_code = captcha_data['code']
+        
+        if user_input != correct_code:
+            bot.send_message(chat_id, f"❌ Неверный код! Вы ввели: {user_input}. Попробуйте еще раз:")
+            logger.info(f"❌ Неверная капча от пользователя {chat_id}: ввел {user_input}, ожидалось {correct_code}")
+            return
+        
+        # Капча пройдена успешно
+        captcha_store.pop(chat_id, None)
+        user_steps[chat_id] = 'ask_from'
+        user_data[chat_id] = {}
+        
+        # Показываем популярные станции для быстрого выбора
+        popular = get_popular_stations(limit=5)
+        popular_names = [s['station_name'] for s in popular] if popular else DEFAULT_STATIONS[:5]
+        
+        keyboard = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
+        row = []
+        for station in popular_names:
+            row.append(KeyboardButton(station))
+            if len(row) == 2:
+                keyboard.add(*row)
+                row = []
+        if row:
+            keyboard.add(*row)
+        keyboard.add(KeyboardButton("🔙 Назад"))
+        
+        bot.send_message(
+            chat_id, 
+            "✅ <b>Капча пройдена!</b>\\n\\n"
+            "1️⃣ <b>Откуда едем?</b>\\n"
+            "Напишите название станции отправления или выберите из популярных:\\n\\n"
+            f"💡 <i>Популярные: {', '.join(popular_names)}</i>",
+            parse_mode="HTML",
+            reply_markup=keyboard
+        )
+        logger.info(f"✅ Капча успешно пройдена пользователем {chat_id}")
         return
     
     # Очистка ввода от опасных символов
