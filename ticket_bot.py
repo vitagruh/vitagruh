@@ -181,7 +181,8 @@ def init_database():
                 first_name TEXT,
                 last_name TEXT,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                last_active TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                last_active TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                captcha_passed BOOLEAN DEFAULT 0
             )
         """)
         
@@ -248,6 +249,20 @@ def save_user(chat_id: int, username: str = None, first_name: str = None, last_n
                 last_name = excluded.last_name,
                 last_active = CURRENT_TIMESTAMP
         """, (chat_id, username, first_name, last_name))
+
+def is_captcha_passed(chat_id: int) -> bool:
+    """Проверяет, прошел ли пользователь капчу"""
+    with get_db_cursor() as cursor:
+        cursor.execute("SELECT captcha_passed FROM users WHERE chat_id = ?", (chat_id,))
+        row = cursor.fetchone()
+        return row is not None and row['captcha_passed'] == 1
+
+def mark_captcha_passed(chat_id: int):
+    """Отмечает, что пользователь прошел капчу"""
+    with get_db_cursor() as cursor:
+        cursor.execute("""
+            UPDATE users SET captcha_passed = 1 WHERE chat_id = ?
+        """, (chat_id,))
 
 def save_tracking_to_db(chat_id: int, from_station: str, to_station: str, 
                         date: str, passengers: int, train_time: str, 
@@ -844,9 +859,8 @@ def show_history(message):
     bot.send_message(chat_id, text, parse_mode="HTML", reply_markup=keyboard)
     logger.info(f"📜 Пользователь {chat_id} запросил историю поисков")
 
-@bot.message_handler(commands=['track'])
-def start_track(message):
-    chat_id = message.chat.id
+def start_track_impl(chat_id):
+    """Реализация запуска трекинга (без декоратора, для вызова из callback)"""
     user_steps[chat_id] = 'ask_from'
     user_data[chat_id] = {}
     
@@ -874,6 +888,39 @@ def start_track(message):
         reply_markup=keyboard
     )
     logger.info(f"Начат трек для {chat_id}. Шаг: ask_from")
+
+@bot.message_handler(commands=['track'])
+def start_track(message):
+    chat_id = message.chat.id
+    
+    # Проверяем, прошел ли пользователь капчу ранее
+    if is_captcha_passed(chat_id):
+        # Капча уже пройдена, сразу начинаем поиск
+        start_track_impl(chat_id)
+        return
+    
+    # Генерируем код капчи (4 символа: буквы и цифры)
+    captcha_code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=4))
+    captcha_store[chat_id] = {
+        'code': captcha_code,
+        'timestamp': time.time()
+    }
+    
+    # Создаем изображение капчи
+    image = ImageCaptcha(width=200, height=80)
+    data = image.generate(captcha_code)
+    
+    # Отправляем капчу пользователю
+    bot.send_photo(
+        chat_id,
+        photo=data,
+        caption="🤖 <b>Подтвердите, что вы не робот!</b>\n\nВведите символы с изображения:",
+        parse_mode="HTML"
+    )
+    
+    # Устанавливаем шаг ожидания ввода капчи
+    user_steps[chat_id] = 'captcha_verify'
+    logger.info(f"🔐 Капча отправлена пользователю {chat_id}")
 
 @bot.message_handler(commands=['stop'])
 def stop_tracking_cmd(message):
@@ -913,8 +960,15 @@ def stop_tracking_cmd(message):
 
 @bot.callback_query_handler(func=lambda call: call.data == "start_tracking")
 def on_start_tracking(call):
-    """Обработчик кнопки Старт - запуск трекинга с капчей"""
+    """Обработчик кнопки Старт - запуск трекинга с капчей (если не пройдена)"""
     chat_id = call.message.chat.id
+    
+    # Проверяем, прошел ли пользователь капчу ранее
+    if is_captcha_passed(chat_id):
+        # Капча уже пройдена, сразу начинаем поиск
+        start_track_impl(chat_id)
+        bot.answer_callback_query(call.id, "✅ Капча уже пройдена! Начинаем поиск.")
+        return
     
     # Генерируем код капчи (4 символа: буквы и цифры)
     captcha_code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=4))
@@ -1125,24 +1179,12 @@ def handle_step_input(message):
         
         # Капча пройдена успешно
         captcha_store.pop(chat_id, None)
-        user_steps[chat_id] = 'ask_from'
-        user_data[chat_id] = {}
         
-        # Показываем популярные станции для быстрого выбора
-        popular = get_popular_stations(limit=5)
-        popular_names = [s['station_name'] for s in popular] if popular else DEFAULT_STATIONS[:5]
+        # Отмечаем в БД, что пользователь прошел капчу (один раз при первом входе)
+        mark_captcha_passed(chat_id)
         
-        keyboard = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
-        row = []
-        for station in popular_names:
-            row.append(KeyboardButton(station))
-            if len(row) == 2:
-                keyboard.add(*row)
-                row = []
-        if row:
-            keyboard.add(*row)
-        keyboard.add(KeyboardButton("🔙 Назад"))
-        
+        # Запускаем трекинг через общую функцию
+        start_track_impl(chat_id)
         bot.send_message(
             chat_id, 
             "✅ <b>Капча пройдена!</b>\\n\\n"

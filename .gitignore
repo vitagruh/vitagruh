@@ -5,9 +5,9 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Dependencies
-venv/
+# Environment
 .venv/
+venv/
 .env
 .env.local
 *.env.*
@@ -15,15 +15,19 @@ venv/
 # Logs
 *.log
 
-# Editor/IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*.tmp
+# Dependencies
+node_modules/
 
-# Build/dist
+# Build artifacts
 dist/
 build/
 target/
+
+# Editors
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
 ```
