@@ -1,326 +1,50 @@
-# Vibecoded(yah) Telegram Bot для отслеживания билетов на поезда (Беларусь)
-
-🚂 Бот для мониторинга наличия мест в поездах на сайте pass.rw.by и автоматического уведомления при появлении билетов.
-
-> ⚠️ **Дисклеймер**: Данный проект создан с использованием искусственного интеллекта (нейросетей). Код может содержать ошибки и требует тщательного тестирования перед использованием в production-среде.
-
-## Возможности
-
-- ✅ **Пошаговый интерфейс** — удобный диалоговый режим ввода данных
-- 📅 **Встроенный календарь Telegram** — выбор даты через интерактивный inline-календарь с навигацией по месяцам
-- 🔔 Мгновенные уведомления при появлении билетов
-- 📊 Подробная информация о поездах и вагонах с ценами
-- ⏱ Настраиваемый интервал проверки
-- 🎯 Выбор конкретного поезда из списка перед запуском мониторинга
-- 🔙 Возможность вернуться к списку поездов
-- 📋 **Расширенное логирование** — все запросы к сайту логируются с указанием пользователя, номера поезда и маршрута
-- 🔒 **Безопасность** — защита от XSS, rate limiting, санитизация пользовательского ввода
-- 💾 **Персистентное хранилище** — сохранение активных трекингов в SQLite
-- 🔄 **Автовосстановление** — восстановление трекингов после перезапуска бота
-- 📍 **Популярные станции** — быстрый выбор станций из часто используемых
-- 📜 **История поисков** — просмотр последних маршрутов с возможностью повтора
-- 💓 **Heartbeat** — периодические уведомления о работе бота (10 мин, 20 мин, 30 мин, 1 час)
-- 🔢 **Мульти-трекинг** — отслеживание до 5 поездов одновременно
-- ⌨ **Кнопки главного меню** — быстрый доступ к функциям бота
-- 🔁 **Повтор поиска** — быстрое повторение предыдущих запросов из истории
-
-## Требования
-
-- Python 3.7+
-- Telegram Bot Token
-
-## Установка
-
-### 1. Клонируйте репозиторий или создайте файл бота
-
-```bash
-cd /workspace
-```
-
-### 2. Создайте виртуальное окружение (рекомендуется)
-
-```bash
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# или
-venv\\Scripts\\activate  # Windows
-```
-
-### 3. Установите зависимости
-
-Файл `requirements.txt` уже содержит необходимые пакеты:
-
-```txt
-pyTelegramBotAPI>=4.10.0
-beautifulsoup4>=4.11.0
-requests>=2.28.0
-python-dotenv>=1.0.0
-fake-useragent>=1.1.0
-telebot-calendar>=1.3.0
-```
-
-Установите пакеты:
-
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Настройте переменные окружения
-
-Создайте файл `.env` в той же директории:
-
-```env
-TELEGRAM_TOKEN="your_bot_token_here"
-CHECK_INTERVAL=60
-LOG_LEVEL=INFO
-LOG_FILE=logs/bot.log
-ERROR_LOG_FILE=logs/error.log
-```
-
-**Получение токена:**
-1. Откройте @BotFather в Telegram
-2. Отправьте команду `/newbot`
-3. Следуйте инструкциям для создания бота
-4. Скопируйте полученный токен в `.env`
-
-## Использование
-
-### Запуск бота
-
-```bash
-python ticket_bot.py
-```
-
-### Команды бота
-
-| Команда | Описание |
-|---------|----------|
-| `/start` | Приветственное сообщение и инструкция |
-| `/track` | Начать пошаговый процесс отслеживания билетов |
-| `/stop` | Остановить активное отслеживание |
-| `/status` | Показать статус текущего отслеживания |
-| `/mytracks` | Показать все активные трекинги пользователя |
-| `/history` | Показать историю последних поисков |
-| `/help` | Подробная справка по использованию бота |
-
-### Пошаговый процесс отслеживания
-
-После команды `/track` бот предложит ввести данные поэтапно:
-
-1. **Откуда едем?** — название станции отправления (например: `Минск`) или выберите из популярных станций
-2. **Куда едем?** — название станции назначения (например: `Москва`) или выберите из популярных станций
-3. **Дата поездки?** — выберите дату через встроенный календарь Telegram 📅
-4. **Сколько пассажиров?** — число пассажиров (например: `2`)
-
-После ввода всех данных бот покажет список доступных поездов с информацией о наличии мест.
-
-### Выбор поезда и запуск мониторинга
-
-1. Выберите нужный поезд из списка, нажав на кнопку
-2. Просмотрите детальную информацию о поезде и вагонах
-3. Нажмите **"▶️ Запустить мониторинг"** для начала отслеживания
-4. Или **"🔙 Назад к списку"** для выбора другого поезда
-
-Бот будет проверять наличие мест каждые `CHECK_INTERVAL` секунд и уведомит вас при появлении подходящих мест.
-
-### Пример диалога
-
-```
-/start
-/track
-→ Минск
-→ Москва
-→ 2026-05-20
-→ 2
-[Список поездов с кнопками]
-→ [Нажатие на поезд]
-[Детальная информация]
-→ [Запустить мониторинг]
-✅ Мониторинг запущен! Ждите уведомления.
-```
-
-## Структура проекта
-
-```
-/workspace/
-├── ticket_bot.py       # Основной файл бота
-├── requirements.txt    # Зависимости Python
-├── .env               # Переменные окружения (не коммитить!)
-├── data/
-│   └── ticket_bot.db  # SQLite база данных для персистентного хранения
-├── logs/
-│   ├── bot.log        # Логи работы бота
-│   └── error.log      # Файл для ошибок уровня ERROR и выше
-└── README.md          # Этот файл
-```
-
-## Особенности
-
-### Логирование
-
-Все действия пользователей и запросы к сайту подробно логируются:
-
-- 🔍 Поиск билетов: пользователь, маршрут, дата
-- 👁 Просмотр деталей поезда: пользователь, номер поезда, время
-- ▶️ Запуск мониторинга: пользователь, поезд, маршрут
-- 💓 Heartbeat сообщения
-- 📊 Просмотр статуса отслеживания
-- ✅ HTTP статусы запросов к сайту
-- 💾 Операции с базой данных: сохранение/удаление трекингов
-
-Логи записываются в два места:
-- `logs/bot.log` — полный лог с детальной информацией
-- `logs/error.log` — только ошибки уровня ERROR и CRITICAL
-
-### База данных (SQLite)
-
-Бот использует SQLite для персистентного хранения данных:
-
-**Таблицы:**
-- `users` — информация о пользователях бота
-- `active_trackings` — активные трекинги билетов
-- `search_history` — история поисков пользователей
-- `popular_stations` — популярные станции для быстрого выбора
-
-**Преимущества:**
-- ✅ Сохранение трекингов между перезапусками бота
-- ✅ Автовосстановление после сбоя
-- ✅ История поисков для каждого пользователя
-- ✅ Статистика популярных станций
-
-### Безопасность
-
-- 🔒 **XSS защита** — очистка пользовательского ввода от опасных символов (`<`, `>`, `"`, `'`, `&`)
-- ⏱ **Rate limiting** — ограничение количества запросов (30 запросов в 60 секунд)
-- 🧹 **Санитизация ввода** — ограничение длины ввода до 100 символов
-- 🔐 **Валидация данных** — проверка формата даты и числа пассажиров
-- 🛡 **Обработка ошибок** — безопасная обработка исключений с логированием
-- 🔢 **Ограничение трекингов** — максимум 5 активных трекингов на пользователя
-- 💾 **Персистентность** — сохранение всех активных трекингов в SQLite
-- 🔄 **Автовосстановление** — автоматическое восстановление после перезапуска
-
-### Обработка ошибок
-- Таймауты при запросах к сайту
-- Повторные попытки при временных сбоях
-- Логирование всех событий в `bot.log` и `error.log`
-
-### Парсинг данных
-- Извлечение количества мест с обработкой различных форматов
-- Получение цен в BYN
-- Определение типа вагона (сидячий/спальный)
-
-## Настройка
-
-### Изменение интервала проверки
-
-В файле `.env`:
-
-```env
-CHECK_INTERVAL=30  # Проверка каждые 30 секунд
-```
-
-⚠️ **Внимание:** Слишком частые запросы могут привести к блокировке со стороны сайта. Рекомендуемый интервал — 60 секунд.
-
-### Уровень логирования
-
-В файле `.env`:
-
-```env
-LOG_LEVEL=DEBUG  # DEBUG, INFO, WARNING, ERROR, CRITICAL
-```
-
-## Развёртывание на сервере
-
-### Использование systemd (Linux)
-
-Создайте файл `/etc/systemd/system/ticketbot.service`:
-
-```ini
-[Unit]
-Description=Telegram Ticket Bot
-After=network.target
-
-[Service]
-Type=simple
-User=your_user
-WorkingDirectory=/path/to/workspace
-Environment="PATH=/path/to/venv/bin"
-ExecStart=/path/to/venv/bin/python ticket_bot.py
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Запустите сервис:
-
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable ticketbot
-sudo systemctl start ticketbot
-sudo systemctl status ticketbot
-```
-
-### Docker (опционально)
-
-Создайте `Dockerfile`:
-
-```dockerfile
-FROM python:3.11-slim
-
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY ticket_bot.py .
-COPY .env .
-
-CMD ["python", "ticket_bot.py"]
-```
-
-## Безопасность
-
-- ⚠️ Никогда не коммитьте файл `.env` в репозиторий
-- Добавьте `.env` в `.gitignore`
-- Используйте секреты для хранения токена в production
-- Регулярно проверяйте логи на предмет подозрительной активности
-
-## Устранение неполадок
-
-### Бот не отвечает
-1. Проверьте логи: `cat logs/bot.log`
-2. Проверьте ошибки: `cat logs/error.log`
-3. Убедитесь, что токен правильный
-4. Проверьте подключение к интернету
-
-### Не находит поезда
-1. Проверьте правильность названий станций
-2. Убедитесь, что дата в формате YYYY-MM-DD
-3. Проверьте доступность сайта pass.rw.by
-
-### Ошибки парсинга
-- Сайт может изменить структуру HTML
-- Проверьте логи для деталей ошибки
-- При необходимости обновите селекторы в коде
-
-### Сессия истекла
-Если вы получили сообщение "Сессия истекла", просто начните заново с команды `/track`
-
-### Rate limit превышен
-Если вы получаете предупреждение о слишком большом количестве запросов, подождите около минуты перед следующими действиями.
-
-## Лицензия
-
-MIT License
-
-## Поддержка
-
-При возникновении проблем:
-1. Проверьте логи в `logs/bot.log` и `logs/error.log`
-2. Убедитесь, что все зависимости установлены
-3. Проверьте корректность токена в `.env`
-4. Убедитесь, что уровень логирования установлен правильно
-
----
-
-> 🤖 **Примечание**: Этот проект был создан с помощью нейросетей. Авторы не несут ответственности за возможные ошибки в коде. Используйте на свой страх и риск.
+# Hoc cum totumque cernit
+
+## Mutat saxoque Parrhasio nec
+
+Lorem markdownum Charybdis sociorum palpitat nomen; et Clyton sum. Quos plectrum
+passu quo tergo ingeniis Bromumque Dromas quem, nam, non lassata sed vallis,
+Cyllene. Regis attonitos `page` longas acervo; e flesse qui gutture tamen
+antemnas illi! Est fraudat possit intendit cervice inmergitque citra Sol
+securaque inhaesit ad durus possit sacri et aquas Phoebus: ense.
+
+1. Fragorem officio quo laetitiae datque animum curvamine
+2. Adorat manibusque Telamon ait fratris firmat in
+3. Egens Pyramus est
+4. Laboras barbara
+5. Superatae captus brevi quasque unica sub furtum
+6. Sororia deprenderat urbes nec longa modum in
+
+## Traxere linguae
+
+Se increpor o procul, conspicuus ille: comes arcus `record` sinistro. Qua in
+tali vecta in umeris: est speravit mox summum plerumque laedi si saevit;
+curvamina pudicos. Caestibus abstulit fas; occiderat hastamque Minos protecta,
+et nec negat. Fassusque fuit o Midan suo; pavetque honorem, est, vix speciem
+his. Lacteus aura ego nisi boves, tibi iam: o **lacte dominae**.
+
+> Modo parum Est vertice isto *conplevit* vultusque famam, qualescumque umbra
+> quis, artus regna pennae ensem. Quae Numam [titulum](#traxere-linguae). Spumam
+> ea `clock_webmail_kerning` ab hoc nec, sic vincula tamen umeros hosti amantem
+> cornibus!
+
+Et adsumere natura committitur petentem facerent vulgi levem fontes putares
+Aesoniden `spritePrinter` Talia; conantemque *inpia aberat*: onus. Quo arbitrium
+carpsit equarum teloque; renovataque tuas suorum
+[ostendit](#hoc-cum-totumque-cernit)? Nam servo dedecet se rector, nomen [et
+vigilans](#hoc-cum-totumque-cernit) etiamnum [maius](#traxere-linguae) vertitur
+lumina pande in motis. Excipit considerat quae, det messes vultibus, famulas.
+Unam facta ipsa, diu accensis nando, e ducebat digna rogum sidera externa summas
+hospitium in more fuit?
+
+## Sentiat latens sub texerat
+
+Opes diversa, sed saxum vimque iugo: seu [summa
+auctor](#sentiat-latens-sub-texerat). Sibi dixit, corporeasque nate pariter
+horum!
+
+Exercebat et iamque eratque undae Sardibus secuta et nodosaque, tamen capaci
+thalamos alias, furtum. Olim facta tanta iussae Neptunum notae sanctis aras.
+Solidas viae inter contigerant posset se umquam convicia se deos et: croceis
+vestrae indeiecta sistunt fuerit velamine manifesta exclamatque. Lingua
+pectoraque electae, ubi *cava miratur precaris* vocat.
