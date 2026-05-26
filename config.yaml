@@ -1,0 +1,32 @@
+# ICAP Relay Configuration
+
+# Address to listen on (host:port)
+listen_addr: ":1344"
+
+# Primary backend ICAP server
+backend_a:
+  name: "Server_A"
+  address: "localhost:1345"
+  service: "/icap/service_a"
+
+# Secondary/backup backend ICAP server  
+backend_b:
+  name: "Server_B"
+  address: "localhost:1346"
+  service: "/icap/service_b"
+
+# Timeout for backend requests in milliseconds
+timeout_ms: 5000
+
+# Priority backend: "A" or "B"
+# Responses from priority backend with status 200/204 are used immediately
+priority: "A"
+
+# Logging level: "debug", "info", or "error"
+log_level: "info"
+
+# Maximum concurrent connections
+max_conns: 100
+
+# Maximum buffer size for request/response bodies (bytes)
+max_buffer_size: 10485760
