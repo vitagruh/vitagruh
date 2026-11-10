@@ -24,20 +24,20 @@
 ## Статистика
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=vitagruh&show_icons=true&theme=merko&hide_border=true&bg_color=0D1117&count_private=true" width="48%" />
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=vitagruh&theme=github_dark" width="100%" />
+</p>
+<p align="center">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=vitagruh&theme=github_dark" width="48%" />
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=vitagruh&theme=merko&hide_border=true&background=0D1117" width="48%" />
 </p>
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=vitagruh&layout=compact&theme=merko&hide_border=true&bg_color=0D1117&langs_count=8" width="48%" />
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=vitagruh&theme=github_dark" width="48%" />
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=vitagruh&theme=github_dark" width="48%" />
 </p>
 
 ## Трофеи
 
-<p align="center">
-  <a href="https://github.com/vitagruh?tab=achievements">
-    <img src="https://github-profile-trophy.vercel.app/?username=vitagruh&theme=matrix&no-frame=true&no-bg=true&column=7&margin-w=8" alt="GitHub Trophies" />
-  </a>
-</p>
+Значки GitHub — Quickdraw, Pull Shark, YOLO и другие — видны в [профиле по вкладке Achievements](https://github.com/vitagruh?tab=achievements).
 
 ## Contribution-змейка
 
