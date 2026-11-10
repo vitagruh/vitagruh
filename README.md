@@ -1,8 +1,8 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00ff9c,100:0077ff&height=220&section=header&text=vitagruh&fontSize=72&fontColor=ffffff&fontAlignY=38&desc=Cybersecurity%20%C2%B7%20Automation%20%C2%B7%20Bots&descSize=18&descAlignY=58" width="100%" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00ff9c,100:0077ff&height=220&section=header&text=vitagruh&fontSize=72&fontColor=ffffff&fontAlignY=38&desc=Offensive%20Security%20%C2%B7%20Red%20Team%20%C2%B7%20Automation&descSize=18&descAlignY=58" width="100%" />
 
 <p align="center">
   <a href="https://github.com/vitagruh">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=800&color=00FF9C&center=true&vCenter=true&width=650&lines=Cybersecurity+%26+Automation;Python+%7C+Kotlin+%7C+JavaScript;Telegram+bots%2C+SIEM%2C+ICAP;Building+tools+in+Minsk" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=2600&pause=600&color=00FF9C&center=true&vCenter=true&width=650&lines=Offensive+Security+%26+Red+Team;%24+nmap+-sV+-Pn+target;%24+python3+exploit.py+--target;%24+cat+findings.md" alt="Typing SVG" />
   </a>
 </p>
 
@@ -34,10 +34,6 @@
   <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=vitagruh&theme=github_dark" width="48%" />
   <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=vitagruh&theme=github_dark" width="48%" />
 </p>
-
-## Трофеи
-
-Значки GitHub — Quickdraw, Pull Shark, YOLO и другие — видны в [профиле по вкладке Achievements](https://github.com/vitagruh?tab=achievements).
 
 ## Contribution-змейка
 
