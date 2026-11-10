@@ -1,4 +1,4 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00ff9c,100:0077ff&height=220&section=header&text=vitagruh&fontSize=72&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Cybersecurity%20%C2%B7%20Automation%20%C2%B7%20Bots&descSize=18&descAlignY=58" width="100%" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00ff9c,100:0077ff&height=220&section=header&text=vitagruh&fontSize=72&fontColor=ffffff&fontAlignY=38&desc=Cybersecurity%20%C2%B7%20Automation%20%C2%B7%20Bots&descSize=18&descAlignY=58" width="100%" />
 
 <p align="center">
   <a href="https://github.com/vitagruh">
