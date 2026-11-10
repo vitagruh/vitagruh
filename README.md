@@ -1,23 +1,28 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00ff9c,100:0077ff&height=220&section=header&text=vitagruh&fontSize=72&fontColor=ffffff&fontAlignY=38&desc=Offensive%20Security%20%C2%B7%20Red%20Team%20%C2%B7%20Automation&descSize=18&descAlignY=58" width="100%" />
+<img src="assets/hacker-banner.svg" width="100%" alt="vitagruh — offensive security" />
 
 <p align="center">
-  <a href="https://github.com/vitagruh">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=2600&pause=600&color=00FF9C&center=true&vCenter=true&width=650&lines=Offensive+Security+%26+Red+Team;%24+nmap+-sV+-Pn+target;%24+python3+exploit.py+--target;%24+cat+findings.md" alt="Typing SVG" />
-  </a>
+  <img src="assets/terminal.svg" width="100%" alt="terminal: projects and stack" />
 </p>
 
 ## Обо мне
 
-- Кибербезопасность: SIEM (Kaspersky KUMA), ICAP-интеграции, инструменты для пентеста
-- Автоматизация и Telegram-боты на Python
-- Kotlin/Android и PWA на JavaScript: от транспортного табло Минска до финансового бота с курсом НБРБ
-- Люблю инструменты, которые работают без лишних зависимостей
+- Наступательная безопасность: пентест-инструменты, SIEM (Kaspersky KUMA), ICAP-интеграции
+- Python: Telegram-боты, парсинг, отчёты и автоматизация
+- Веб без зависимостей: PWA на чистом JavaScript
+- Linux, Docker и SQLite как ежедневный стек
+
+## Проекты
+
+- **[passrw-bot](https://github.com/vitagruh/passrw-bot)** — Telegram-бот слежения за билетами БЖД: пошаговый поиск, inline-календарь, до 5 поездов на пользователя, Flask-админка и SQLite.
+- **[kuma-correlation-stats](https://github.com/vitagruh/kuma-correlation-stats)** — ежедневная статистика сработок правил Kaspersky KUMA: REST API v3, история в SQLite, поиск аномалий, HTML-отчёт с графиками, CSV/JSON и уведомления.
+- **[minsk-transport](https://github.com/vitagruh/minsk-transport)** — PWA-табло транспорта Минска на избранных остановках: автообновление, поиск по справочнику и карта; без API-ключей и зависимостей.
+- **[qoder-telegram-bot](https://github.com/vitagruh/qoder-telegram-bot)** — бот на aiogram 3 для запуска задач Qoder на Linux: сессии, загрузка файлов, подтверждения кнопками и статистика расхода.
 
 ## Навыки
 
 <p align="center">
   <a href="https://github.com/vitagruh">
-    <img src="https://skillicons.dev/icons?i=python,kotlin,js,html,css,git,github,linux,vscode,sqlite,telegram&theme=dark" alt="Skills" />
+    <img src="https://skillicons.dev/icons?i=python,js,html,css,sqlite,flask,docker,linux,git,github,telegram&theme=dark" alt="Skills" />
   </a>
 </p>
 

@@ -1,0 +1,94 @@
+<svg width="1200" height="300" viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="vitagruh — offensive security">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0f0d"/>
+      <stop offset="55%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#070a09"/>
+    </linearGradient>
+    <radialGradient id="vig" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#0d1117" stop-opacity="0"/>
+      <stop offset="70%" stop-color="#0d1117" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#0d1117" stop-opacity="0.85"/>
+    </radialGradient>
+    <linearGradient id="scan" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00ff9c" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#00ff9c" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#00ff9c" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#00ff9c" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
+    <filter id="glow" x="-30%" y="-60%" width="160%" height="220%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="300" fill="url(#bg)"/>
+  <rect width="1200" height="300" fill="url(#grid)"/>
+
+  <!-- matrix rain -->
+  <g font-family="'Fira Code','JetBrains Mono',Consolas,monospace" font-size="15" fill="#00ff9c">
+    <g opacity="0.16"><text x="38" y="0"><tspan x="38" dy="0">4A</tspan><tspan x="38" dy="19">9F</tspan><tspan x="38" dy="19">13</tspan><tspan x="38" dy="19">C7</tspan><tspan x="38" dy="19">02</tspan><tspan x="38" dy="19">E1</tspan><tspan x="38" dy="19">7B</tspan><tspan x="38" dy="19">5D</tspan><tspan x="38" dy="19">A0</tspan><tspan x="38" dy="19">3C</tspan><tspan x="38" dy="19">F8</tspan><tspan x="38" dy="19">61</tspan><tspan x="38" dy="19">D4</tspan><tspan x="38" dy="19">0E</tspan><tspan x="38" dy="19">92</tspan><tspan x="38" dy="19">B5</tspan></text><animateTransform attributeName="transform" type="translate" from="0 -350" to="0 320" dur="13s" begin="-2s" repeatCount="indefinite"/></g>
+    <g opacity="0.10"><text x="132" y="0"><tspan x="132" dy="0">E3</tspan><tspan x="132" dy="19">0A</tspan><tspan x="132" dy="19">7C</tspan><tspan x="132" dy="19">B1</tspan><tspan x="132" dy="19">4F</tspan><tspan x="132" dy="19">C6</tspan><tspan x="132" dy="19">28</tspan><tspan x="132" dy="19">9D</tspan><tspan x="132" dy="19">5A</tspan><tspan x="132" dy="19">F0</tspan><tspan x="132" dy="19">63</tspan><tspan x="132" dy="19">1E</tspan><tspan x="132" dy="19">D7</tspan><tspan x="132" dy="19">84</tspan><tspan x="132" dy="19">2B</tspan><tspan x="132" dy="19">AC</tspan></text><animateTransform attributeName="transform" type="translate" from="0 -350" to="0 320" dur="17s" begin="-11s" repeatCount="indefinite"/></g>
+    <g opacity="0.14"><text x="226" y="0"><tspan x="226" dy="0">7D</tspan><tspan x="226" dy="19">51</tspan><tspan x="226" dy="19">C0</tspan><tspan x="226" dy="19">39</tspan><tspan x="226" dy="19">A8</tspan><tspan x="226" dy="19">0F</tspan><tspan x="226" dy="19">E6</tspan><tspan x="226" dy="19">72</tspan><tspan x="226" dy="19">1B</tspan><tspan x="226" dy="19">D9</tspan><tspan x="226" dy="19">4C</tspan><tspan x="226" dy="19">B3</tspan><tspan x="226" dy="19">65</tspan><tspan x="226" dy="19">8E</tspan><tspan x="226" dy="19">F4</tspan><tspan x="226" dy="19">27</tspan></text><animateTransform attributeName="transform" type="translate" from="0 -350" to="0 320" dur="9s" begin="-5s" repeatCount="indefinite"/></g>
+    <g opacity="0.09"><text x="320" y="0"><tspan x="320" dy="0">B8</tspan><tspan x="320" dy="19">2E</tspan><tspan x="320" dy="19">6F</tspan><tspan x="320" dy="19">D1</tspan><tspan x="320" dy="19">07</tspan><tspan x="320" dy="19">9C</tspan><tspan x="320" dy="19">43</tspan><tspan x="320" dy="19">EA</tspan><tspan x="320" dy="19">58</tspan><tspan x="320" dy="19">1D</tspan><tspan x="320" dy="19">C4</tspan><tspan x="320" dy="19">76</tspan><tspan x="320" dy="19">AF</tspan><tspan x="320" dy="19">32</tspan><tspan x="320" dy="19">9B</tspan><tspan x="320" dy="19">05</tspan></text><animateTransform attributeName="transform" type="translate" from="0 -350" to="0 320" dur="15s" begin="-13s" repeatCount="indefinite"/></g>
+    <g opacity="0.13"><text x="414" y="0"><tspan x="414" dy="0">1A</tspan><tspan x="414" dy="19">F7</tspan><tspan x="414" dy="19">6B</tspan><tspan x="414" dy="19">C2</tspan><tspan x="414" dy="19">90</tspan><tspan x="414" dy="19">3D</tspan><tspan x="414" dy="19">E8</tspan><tspan x="414" dy="19">5F</tspan><tspan x="414" dy="19">04</tspan><tspan x="414" dy="19">AB</tspan><tspan x="414" dy="19">77</tspan><tspan x="414" dy="19">D0</tspan><tspan x="414" dy="19">29</tspan><tspan x="414" dy="19">8C</tspan><tspan x="414" dy="19">B6</tspan><tspan x="414" dy="19">41</tspan></text><animateTransform attributeName="transform" type="translate" from="0 -350" to="0 320" dur="11s" begin="-7s" repeatCount="indefinite"/></g>
+    <g opacity="0.10"><text x="508" y="0"><tspan x="508" dy="0">D5</tspan><tspan x="508" dy="19">38</tspan><tspan x="508" dy="19">6A</tspan><tspan x="508" dy="19">F1</tspan><tspan x="508" dy="19">0C</tspan><tspan x="508" dy="19">94</tspan><tspan x="508" dy="19">2F</tspan><tspan x="508" dy="19">C9</tspan><tspan x="508" dy="19">57</tspan><tspan x="508" dy="19">E2</tspan><tspan x="508" dy="19">1F</tspan><tspan x="508" dy="19">83</tspan><tspan x="508" dy="19">BC</tspan><tspan x="508" dy="19">40</tspan><tspan x="508" dy="19">9A</tspan><tspan x="508" dy="19">6D</tspan></text><animateTransform attributeName="transform" type="translate" from="0 -350" to="0 320" dur="16s" begin="-3s" repeatCount="indefinite"/></g>
+    <g opacity="0.12"><text x="602" y="0"><tspan x="602" dy="0">3E</tspan><tspan x="602" dy="19">B0</tspan><tspan x="602" dy="19">17</tspan><tspan x="602" dy="19">EA</tspan><tspan x="602" dy="19">65</tspan><tspan x="602" dy="19">0B</tspan><tspan x="602" dy="19">C8</tspan><tspan x="602" dy="19">4A</tspan><tspan x="602" dy="19">D2</tspan><tspan x="602" dy="19">79</tspan><tspan x="602" dy="19">1C</tspan><tspan x="602" dy="19">F5</tspan><tspan x="602" dy="19">8F</tspan><tspan x="602" dy="19">23</tspan><tspan x="602" dy="19">A6</tspan><tspan x="602" dy="19">5C</tspan></text><animateTransform attributeName="transform" type="translate" from="0 -350" to="0 320" dur="10s" begin="-9s" repeatCount="indefinite"/></g>
+    <g opacity="0.09"><text x="696" y="0"><tspan x="696" dy="0">F2</tspan><tspan x="696" dy="19">4D</tspan><tspan x="696" dy="19">86</tspan><tspan x="696" dy="19">1B</tspan><tspan x="696" dy="19">C0</tspan><tspan x="696" dy="19">59</tspan><tspan x="696" dy="19">37</tspan><tspan x="696" dy="19">DE</tspan><tspan x="696" dy="19">6A</tspan><tspan x="696" dy="19">02</tspan><tspan x="696" dy="19">B9</tspan><tspan x="696" dy="19">7C</tspan><tspan x="696" dy="19">E5</tspan><tspan x="696" dy="19">14</tspan><tspan x="696" dy="19">A3</tspan><tspan x="696" dy="19">C7</tspan></text><animateTransform attributeName="transform" type="translate" from="0 -350" to="0 320" dur="14s" begin="-6s" repeatCount="indefinite"/></g>
+    <g opacity="0.15"><text x="790" y="0"><tspan x="790" dy="0">05</tspan><tspan x="790" dy="19">E9</tspan><tspan x="790" dy="19">2C</tspan><tspan x="790" dy="19">B4</tspan><tspan x="790" dy="19">6F</tspan><tspan x="790" dy="19">18</tspan><tspan x="790" dy="19">D3</tspan><tspan x="790" dy="19">47</tspan><tspan x="790" dy="19">9E</tspan><tspan x="790" dy="19">21</tspan><tspan x="790" dy="19">AB</tspan><tspan x="790" dy="19">5D</tspan><tspan x="790" dy="19">F0</tspan><tspan x="790" dy="19">36</tspan><tspan x="790" dy="19">C2</tspan><tspan x="790" dy="19">68</tspan></text><animateTransform attributeName="transform" type="translate" from="0 -350" to="0 320" dur="12s" begin="-1s" repeatCount="indefinite"/></g>
+    <g opacity="0.10"><text x="884" y="0"><tspan x="884" dy="0">A1</tspan><tspan x="884" dy="19">3F</tspan><tspan x="884" dy="19">D8</tspan><tspan x="884" dy="19">0E</tspan><tspan x="884" dy="19">7A</tspan><tspan x="884" dy="19">C5</tspan><tspan x="884" dy="19">52</tspan><tspan x="884" dy="19">1B</tspan><tspan x="884" dy="19">E4</tspan><tspan x="884" dy="19">69</tspan><tspan x="884" dy="19">2D</tspan><tspan x="884" dy="19">B7</tspan><tspan x="884" dy="19">04</tspan><tspan x="884" dy="19">9C</tspan><tspan x="884" dy="19">F3</tspan><tspan x="884" dy="19">58</tspan></text><animateTransform attributeName="transform" type="translate" from="0 -350" to="0 320" dur="18s" begin="-15s" repeatCount="indefinite"/></g>
+    <g opacity="0.13"><text x="978" y="0"><tspan x="978" dy="0">6C</tspan><tspan x="978" dy="19">B2</tspan><tspan x="978" dy="19">19</tspan><tspan x="978" dy="19">E0</tspan><tspan x="978" dy="19">45</tspan><tspan x="978" dy="19">8A</tspan><tspan x="978" dy="19">D6</tspan><tspan x="978" dy="19">27</tspan><tspan x="978" dy="19">F9</tspan><tspan x="978" dy="19">3B</tspan><tspan x="978" dy="19">5E</tspan><tspan x="978" dy="19">C1</tspan><tspan x="978" dy="19">70</tspan><tspan x="978" dy="19">0D</tspan><tspan x="978" dy="19">A8</tspan><tspan x="978" dy="19">64</tspan></text><animateTransform attributeName="transform" type="translate" from="0 -350" to="0 320" dur="8s" begin="-4s" repeatCount="indefinite"/></g>
+    <g opacity="0.11"><text x="1072" y="0"><tspan x="1072" dy="0">E7</tspan><tspan x="1072" dy="19">1D</tspan><tspan x="1072" dy="19">B5</tspan><tspan x="1072" dy="19">40</tspan><tspan x="1072" dy="19">8F</tspan><tspan x="1072" dy="19">CA</tspan><tspan x="1072" dy="19">26</tspan><tspan x="1072" dy="19">F4</tspan><tspan x="1072" dy="19">59</tspan><tspan x="1072" dy="19">03</tspan><tspan x="1072" dy="19">9D</tspan><tspan x="1072" dy="19">6B</tspan><tspan x="1072" dy="19">D0</tspan><tspan x="1072" dy="19">2A</tspan><tspan x="1072" dy="19">C3</tspan><tspan x="1072" dy="19">75</tspan></text><animateTransform attributeName="transform" type="translate" from="0 -350" to="0 320" dur="15s" begin="-10s" repeatCount="indefinite"/></g>
+    <g opacity="0.09"><text x="1160" y="0"><tspan x="1160" dy="0">2B</tspan><tspan x="1160" dy="19">F0</tspan><tspan x="1160" dy="19">5C</tspan><tspan x="1160" dy="19">93</tspan><tspan x="1160" dy="19">0A</tspan><tspan x="1160" dy="19">C6</tspan><tspan x="1160" dy="19">71</tspan><tspan x="1160" dy="19">38</tspan><tspan x="1160" dy="19">E1</tspan><tspan x="1160" dy="19">4E</tspan><tspan x="1160" dy="19">A7</tspan><tspan x="1160" dy="19">12</tspan><tspan x="1160" dy="19">DD</tspan><tspan x="1160" dy="19">65</tspan><tspan x="1160" dy="19">99</tspan><tspan x="1160" dy="19">B8</tspan></text><animateTransform attributeName="transform" type="translate" from="0 -350" to="0 320" dur="19s" begin="-7s" repeatCount="indefinite"/></g>
+  </g>
+
+  <!-- scanline -->
+  <rect x="0" y="-40" width="1200" height="40" fill="url(#scan)" opacity="0.5">
+    <animateTransform attributeName="transform" type="translate" from="0 -40" to="0 340" dur="7s" repeatCount="indefinite"/>
+  </rect>
+  <rect width="1200" height="300" fill="url(#vig)"/>
+
+  <!-- corner brackets -->
+  <g stroke="#00ff9c" stroke-width="2" fill="none" opacity="0.55">
+    <path d="M18 44V18h26"/>
+    <path d="M1156 18h26v26"/>
+    <path d="M1182 256v26h-26"/>
+    <path d="M44 282H18v-26"/>
+  </g>
+
+  <!-- status line -->
+  <g font-family="'Fira Code','JetBrains Mono',Consolas,monospace" font-size="14">
+    <text x="46" y="42" fill="#00ff9c" opacity="0.75">root@vitagruh:~#</text>
+    <text x="1154" y="42" fill="#ff7b72" opacity="0.7" text-anchor="end">authorized targets only</text>
+  </g>
+
+  <!-- glitch title -->
+  <g font-family="'Fira Code','JetBrains Mono',Consolas,monospace" font-weight="700" font-size="96" text-anchor="middle" letter-spacing="2">
+    <text x="600" y="158" fill="#00ff9c" opacity="0.55" filter="url(#glow)">
+      vitagruh
+      <animateTransform attributeName="transform" type="translate" values="0 0;0 0;-4 1;3 -1;0 0;0 0;2 1;-2 -1;0 0" keyTimes="0;0.4;0.42;0.44;0.46;0.72;0.74;0.76;0.78" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;0.55;0.55;0;0" keyTimes="0;0.4;0.42;0.72;0.74;1" dur="6s" repeatCount="indefinite"/>
+    </text>
+    <text x="600" y="158" fill="#0077ff" opacity="0.4" filter="url(#glow)">
+      vitagruh
+      <animateTransform attributeName="transform" type="translate" values="0 0;0 0;3 -1;-3 1;0 0;0 0;-2 1;2 -1;0 0" keyTimes="0;0.4;0.42;0.44;0.46;0.72;0.74;0.76;0.78" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;0.4;0.4;0;0" keyTimes="0;0.4;0.42;0.72;0.74;1" dur="6s" repeatCount="indefinite"/>
+    </text>
+    <text x="600" y="158" fill="#eafff5" filter="url(#glow)">vitagruh</text>
+  </g>
+
+  <!-- subtitle -->
+  <g font-family="'Fira Code','JetBrains Mono',Consolas,monospace" font-size="18" fill="#7de8b5" text-anchor="middle" letter-spacing="4">
+    <text x="600" y="200">offensive security · red team</text>
+  </g>
+
+  <!-- blinking cursor -->
+  <rect x="593" y="222" width="14" height="4" fill="#00ff9c">
+    <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.51;1" dur="1.1s" repeatCount="indefinite"/>
+  </rect>
+</svg>

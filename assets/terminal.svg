@@ -1,0 +1,47 @@
+<svg width="1100" height="260" viewBox="0 0 1100 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="terminal: projects">
+  <defs>
+    <linearGradient id="tbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#10161c"/>
+      <stop offset="100%" stop-color="#0b0f14"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="1" y="1" width="1098" height="258" rx="10" fill="url(#tbg)" stroke="#1f6f4a" stroke-width="2"/>
+  <path d="M1 36h1098" stroke="#1f6f4a" stroke-width="2"/>
+  <g>
+    <circle cx="26" cy="18" r="6" fill="#ff5f56"/>
+    <circle cx="48" cy="18" r="6" fill="#ffbd2e"/>
+    <circle cx="70" cy="18" r="6" fill="#27c93f"/>
+  </g>
+  <text x="550" y="23" fill="#6e7681" font-family="'Fira Code','JetBrains Mono',Consolas,monospace" font-size="13" text-anchor="middle">vitagruh — zsh — 110×30</text>
+
+  <g font-family="'Fira Code','JetBrains Mono',Consolas,monospace" font-size="16">
+    <g opacity="0">
+      <text x="28" y="74" fill="#00ff9c">$ <tspan fill="#e6edf3">whoami</tspan></text>
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.01;0.05;0.94;1" dur="22s" begin="0.3s" repeatCount="indefinite"/>
+    </g>
+    <g opacity="0">
+      <text x="28" y="104" fill="#8b949e">vitagruh — offensive security / red team</text>
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.01;0.05;0.94;1" dur="22s" begin="1.0s" repeatCount="indefinite"/>
+    </g>
+    <g opacity="0">
+      <text x="28" y="140" fill="#00ff9c">$ <tspan fill="#e6edf3">ls ~/projects</tspan></text>
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.01;0.05;0.94;1" dur="22s" begin="1.9s" repeatCount="indefinite"/>
+    </g>
+    <g opacity="0">
+      <text x="28" y="170" fill="#7de8b5">passrw-bot  kuma-correlation-stats  minsk-transport  qoder-telegram-bot</text>
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.01;0.05;0.94;1" dur="22s" begin="2.7s" repeatCount="indefinite"/>
+    </g>
+    <g opacity="0">
+      <text x="28" y="206" fill="#00ff9c">$ <tspan fill="#e6edf3">cat stack.txt</tspan></text>
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.01;0.05;0.94;1" dur="22s" begin="3.5s" repeatCount="indefinite"/>
+    </g>
+    <g opacity="0">
+      <text x="28" y="236" fill="#8b949e">python · javascript · sqlite · flask · aiogram · docker</text>
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.01;0.05;0.94;1" dur="22s" begin="4.3s" repeatCount="indefinite"/>
+    </g>
+    <rect x="580" y="222" width="9" height="16" fill="#00ff9c">
+      <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.51;1" dur="1.1s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+</svg>
